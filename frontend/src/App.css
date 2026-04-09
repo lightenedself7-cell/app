@@ -14,5 +14,19 @@ body {
   font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #F5F3F0;
+  background-color: #FAF8F5;
+}
+
+:root {
+  --color-bg-primary: #FAF8F5;
+  --color-bg-secondary: #F5F2EE;
+  --color-bg-card: #FFFFFF;
+  --color-text-primary: #8B7D6B;
+  --color-text-secondary: #A89A8A;
+  --color-text-muted: #C4B8AA;
+  --color-accent-sage: #A8B5A7;
+  --color-accent-pink: #E8C9C1;
+  --color-accent-gold: #C9A875;
+  --color-button-primary: #8B9481;
+  --color-button-hover: #757F6E;
 }
