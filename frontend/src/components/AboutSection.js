@@ -23,7 +23,7 @@ const AboutSection = () => {
           <div className="relative">
             <div className="relative overflow-hidden rounded-3xl shadow-2xl">
               <img
-                src="https://images.unsplash.com/photo-1499728603263-13726abce5fd?w=800&q=80"
+                src="https://images.unsplash.com/photo-1617391484407-e58218dee463?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHw0fHx3b21hbiUyMG1lZGl0YXRpbmclMjBwZWFjZWZ1bCUyMGxvdHVzJTIwcG9zZXxlbnwwfHx8fDE3NzU3NDMyNzl8MA&ixlib=rb-4.1.0&q=85"
                 alt="Lightened Self healing practice"
                 className="w-full h-[700px] object-cover"
               />
