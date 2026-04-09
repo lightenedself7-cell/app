@@ -58,7 +58,12 @@ const BookingModal = ({ service, onClose }) => {
 
       if (response.data.url) {
         setRedirectUrl(response.data.url);
-        window.location.href = response.data.url;
+        // Stripe blocks rendering inside iframes — open in new tab if embedded
+        if (window.self !== window.top) {
+          window.open(response.data.url, '_blank');
+        } else {
+          window.location.href = response.data.url;
+        }
       } else {
         toast.error("Could not initiate payment. Please try again.");
         setIsSubmitting(false);
