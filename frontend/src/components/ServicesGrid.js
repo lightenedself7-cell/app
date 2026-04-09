@@ -6,18 +6,13 @@ const services = [
     subtitle: "Global focus",
     color: "#E6E0D7",
     illustration: (
-      <svg viewBox="0 0 100 100" className="w-20 h-20 opacity-50" fill="none" stroke="#546142" strokeWidth="1.5">
-        {/* Person with connection/virtual lines */}
-        <circle cx="50" cy="35" r="12" />
-        <path d="M50 47 L50 70" strokeLinecap="round"/>
-        <path d="M50 55 L35 65" strokeLinecap="round"/>
-        <path d="M50 55 L65 65" strokeLinecap="round"/>
-        {/* Connection dots */}
-        <circle cx="25" cy="25" r="3" fill="#546142" opacity="0.4"/>
-        <circle cx="75" cy="25" r="3" fill="#546142" opacity="0.4"/>
-        <circle cx="50" cy="15" r="3" fill="#546142" opacity="0.4"/>
-        <line x1="50" y1="35" x2="25" y2="25" strokeDasharray="2,2" opacity="0.3"/>
-        <line x1="50" y1="35" x2="75" y2="25" strokeDasharray="2,2" opacity="0.3"/>
+      <svg viewBox="0 0 120 160" className="w-20 h-24 opacity-40" fill="none" stroke="#546142" strokeWidth="1.2">
+        {/* Single elegant stem with leaves */}
+        <path d="M60 140 L60 40" strokeLinecap="round"/>
+        <path d="M60 60 Q45 55 40 60 Q45 65 60 60" fill="none"/>
+        <path d="M60 80 Q75 75 80 80 Q75 85 60 80" fill="none"/>
+        <path d="M60 100 Q45 95 40 100 Q45 105 60 100" fill="none"/>
+        <circle cx="60" cy="35" r="4" fill="#546142"/>
       </svg>
     ),
   },
@@ -25,25 +20,15 @@ const services = [
     title: "1:1 Mentorship",
     color: "#E8D3C5",
     illustration: (
-      <svg viewBox="0 0 100 100" className="w-20 h-20 opacity-50" fill="none" stroke="#546142" strokeWidth="1.5">
-        {/* Two figures - mentor and mentee */}
-        <circle cx="35" cy="30" r="10" />
-        <path d="M35 40 L35 60" strokeLinecap="round"/>
-        <path d="M35 48 L25 58" strokeLinecap="round"/>
-        <path d="M35 48 L45 58" strokeLinecap="round"/>
-        
-        <circle cx="65" cy="35" r="8" />
-        <path d="M65 43 L65 60" strokeLinecap="round"/>
-        <path d="M65 50 L57 58" strokeLinecap="round"/>
-        <path d="M65 50 L73 58" strokeLinecap="round"/>
-        
-        {/* Connection arrow */}
-        <path d="M45 35 L57 38" strokeLinecap="round" markerEnd="url(#arrowhead)"/>
-        <defs>
-          <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto">
-            <polygon points="0 0, 5 3, 0 6" fill="#546142" opacity="0.5"/>
-          </marker>
-        </defs>
+      <svg viewBox="0 0 120 160" className="w-20 h-24 opacity-40" fill="none" stroke="#546142" strokeWidth="1.2">
+        {/* Growing plant with upward growth */}
+        <path d="M60 140 L60 70 Q60 50 70 45" strokeLinecap="round"/>
+        <path d="M50 120 Q45 115 50 110" />
+        <path d="M70 120 Q75 115 70 110" />
+        <path d="M55 90 Q50 85 55 80" />
+        <path d="M65 90 Q70 85 65 80" />
+        <path d="M60 60 Q55 55 60 50 M60 60 Q65 55 60 50" />
+        <circle cx="70" cy="42" r="3" fill="#546142"/>
       </svg>
     ),
   },
@@ -115,21 +100,15 @@ const services = [
     title: "Quick Energy Reset",
     color: "#546142",
     illustration: (
-      <svg viewBox="0 0 100 100" className="w-20 h-20 opacity-50" fill="none" stroke="#E6E0D7" strokeWidth="1.5">
-        {/* Person with energy burst */}
-        <circle cx="50" cy="35" r="9" />
-        <path d="M50 44 L50 62" strokeLinecap="round"/>
-        <path d="M50 52 L40 60" strokeLinecap="round"/>
-        <path d="M50 52 L60 60" strokeLinecap="round"/>
-        
-        {/* Lightning/energy bolts */}
-        <path d="M50 20 L47 28 L50 28 L48 35" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"/>
-        <path d="M35 30 L38 35 L35 35 L37 40" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"/>
-        <path d="M65 30 L62 35 L65 35 L63 40" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5"/>
-        
-        {/* Energy rays */}
-        <line x1="25" y1="40" x2="20" y2="35" opacity="0.4" strokeWidth="1"/>
-        <line x1="75" y1="40" x2="80" y2="35" opacity="0.4" strokeWidth="1"/>
+      <svg viewBox="0 0 120 160" className="w-20 h-24 opacity-40" fill="none" stroke="#E6E0D7" strokeWidth="1.2">
+        {/* Dynamic upward energy plant */}
+        <path d="M60 140 L60 90" strokeLinecap="round"/>
+        <path d="M60 90 L50 70 L60 75 L55 55 L60 60 L58 45" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M60 90 L70 70 L60 75 L65 55 L60 60 L62 45" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M60 110 Q52 108 50 112" />
+        <path d="M60 125 Q68 123 70 127" />
+        <circle cx="58" cy="42" r="2.5" fill="#E6E0D7"/>
+        <circle cx="62" cy="42" r="2.5" fill="#E6E0D7"/>
       </svg>
     ),
   },
