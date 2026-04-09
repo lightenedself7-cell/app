@@ -5,19 +5,13 @@ from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
 import asyncio
+import stripe
 import resend
 from pathlib import Path
 from pydantic import BaseModel, Field, ConfigDict, EmailStr
-from typing import List, Optional, Dict
+from typing import List, Dict
 import uuid
 from datetime import datetime, timezone
-
-from emergentintegrations.payments.stripe.checkout import (
-    StripeCheckout,
-    CheckoutSessionResponse,
-    CheckoutStatusResponse,
-    CheckoutSessionRequest,
-)
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -28,7 +22,8 @@ client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
 # Stripe setup
-stripe_api_key = os.environ.get('STRIPE_API_KEY')
+stripe.api_key = os.environ.get('STRIPE_API_KEY')
+STRIPE_WEBHOOK_SECRET = os.environ.get('STRIPE_WEBHOOK_SECRET', '')
 
 # Resend setup
 resend.api_key = os.environ.get('RESEND_API_KEY')
@@ -239,7 +234,7 @@ async def get_contact_submissions():
     return submissions
 
 
-# ─── Booking Endpoints (legacy, kept for reference) ───
+# ─── Booking Endpoints (legacy) ───
 @api_router.post("/bookings", response_model=BookingRequest)
 async def create_booking(input: BookingRequestCreate):
     try:
@@ -271,44 +266,48 @@ async def get_services():
 
 # ─── Stripe Checkout Endpoints ───
 @api_router.post("/create-checkout-session")
-async def create_checkout_session(req: CheckoutRequest, http_request: Request):
-    # Validate service
+async def create_checkout_session(req: CheckoutRequest):
     if req.service_id not in SERVICE_PACKAGES:
         raise HTTPException(status_code=400, detail="Invalid service selected")
 
     service = SERVICE_PACKAGES[req.service_id]
     amount = service["price"]
 
-    # Build URLs from the frontend origin (never hardcode)
     origin = req.origin_url.rstrip("/")
     success_url = f"{origin}/booking/success?session_id={{CHECKOUT_SESSION_ID}}"
     cancel_url = f"{origin}/booking/cancel"
 
-    # Initialize Stripe
-    host_url = str(http_request.base_url).rstrip("/")
-    webhook_url = f"{host_url}/api/webhook/stripe"
-    stripe_checkout = StripeCheckout(api_key=stripe_api_key, webhook_url=webhook_url)
-
-    # Create checkout session
-    checkout_req = CheckoutSessionRequest(
-        amount=float(amount),
-        currency="cad",
-        success_url=success_url,
-        cancel_url=cancel_url,
-        metadata={
-            "name": req.name,
-            "email": req.email,
-            "phone": req.phone,
-            "date": req.date,
-            "time": req.time,
-            "service_id": req.service_id,
-            "service_title": service["title"],
-            "notes": req.notes,
-        },
-    )
+    metadata = {
+        "name": req.name,
+        "email": req.email,
+        "phone": req.phone,
+        "date": req.date,
+        "time": req.time,
+        "service_id": req.service_id,
+        "service_title": service["title"],
+        "notes": req.notes,
+    }
 
     try:
-        session: CheckoutSessionResponse = await stripe_checkout.create_checkout_session(checkout_req)
+        session = stripe.checkout.Session.create(
+            payment_method_types=["card"],
+            line_items=[{
+                "price_data": {
+                    "currency": "cad",
+                    "unit_amount": int(amount * 100),
+                    "product_data": {
+                        "name": service["title"],
+                        "description": f"{service['duration']} session",
+                    },
+                },
+                "quantity": 1,
+            }],
+            mode="payment",
+            success_url=success_url,
+            cancel_url=cancel_url,
+            metadata=metadata,
+            customer_email=req.email,
+        )
     except Exception as e:
         logger.error(f"Stripe checkout error: {e}")
         raise HTTPException(status_code=500, detail="Failed to create payment session")
@@ -316,7 +315,7 @@ async def create_checkout_session(req: CheckoutRequest, http_request: Request):
     # Save payment transaction as pending
     transaction = {
         "id": str(uuid.uuid4()),
-        "session_id": session.session_id,
+        "session_id": session.id,
         "name": req.name,
         "email": req.email,
         "phone": req.phone,
@@ -333,36 +332,35 @@ async def create_checkout_session(req: CheckoutRequest, http_request: Request):
     }
     await db.payment_transactions.insert_one(transaction)
 
-    return {"url": session.url, "session_id": session.session_id}
+    return {"url": session.url, "session_id": session.id}
 
 
 @api_router.get("/checkout-status/{session_id}")
-async def get_checkout_status(session_id: str, http_request: Request):
-    # Initialize Stripe
-    host_url = str(http_request.base_url).rstrip("/")
-    webhook_url = f"{host_url}/api/webhook/stripe"
-    stripe_checkout = StripeCheckout(api_key=stripe_api_key, webhook_url=webhook_url)
-
+async def get_checkout_status(session_id: str):
     try:
-        status: CheckoutStatusResponse = await stripe_checkout.get_checkout_status(session_id)
+        session = stripe.checkout.Session.retrieve(session_id)
     except Exception as e:
         logger.error(f"Stripe status check error: {e}")
         raise HTTPException(status_code=500, detail="Failed to check payment status")
 
+    payment_status = session.payment_status or "unpaid"
+    session_status = session.status or "open"
+    metadata = dict(session.metadata) if session.metadata else {}
+
     # Update transaction in DB
     txn = await db.payment_transactions.find_one({"session_id": session_id}, {"_id": 0})
-    if txn and txn.get("payment_status") != status.payment_status:
+    if txn and txn.get("payment_status") != payment_status:
         await db.payment_transactions.update_one(
             {"session_id": session_id},
             {"$set": {
-                "payment_status": status.payment_status,
-                "status": status.status,
+                "payment_status": payment_status,
+                "status": session_status,
                 "updated_at": datetime.now(timezone.utc).isoformat(),
             }},
         )
 
         # On successful payment, create booking and send confirmation email
-        if status.payment_status == "paid" and txn.get("payment_status") != "paid":
+        if payment_status == "paid" and txn.get("payment_status") != "paid":
             booking_obj = BookingRequest(
                 name=txn["name"],
                 email=txn["email"],
@@ -381,7 +379,6 @@ async def get_checkout_status(session_id: str, http_request: Request):
             doc['timestamp'] = doc['timestamp'].isoformat()
             await db.bookings.insert_one(doc)
 
-            # Send confirmation email
             html = _confirmation_email(
                 txn["name"],
                 txn["service_title"],
@@ -396,11 +393,11 @@ async def get_checkout_status(session_id: str, http_request: Request):
             )
 
     return {
-        "status": status.status,
-        "payment_status": status.payment_status,
-        "amount_total": status.amount_total,
-        "currency": status.currency,
-        "metadata": status.metadata,
+        "status": session_status,
+        "payment_status": payment_status,
+        "amount_total": session.amount_total,
+        "currency": session.currency,
+        "metadata": metadata,
     }
 
 
@@ -408,45 +405,59 @@ async def get_checkout_status(session_id: str, http_request: Request):
 @api_router.post("/webhook/stripe")
 async def stripe_webhook(request: Request):
     body = await request.body()
-    sig = request.headers.get("Stripe-Signature", "")
-
-    host_url = str(request.base_url).rstrip("/")
-    webhook_url = f"{host_url}/api/webhook/stripe"
-    stripe_checkout = StripeCheckout(api_key=stripe_api_key, webhook_url=webhook_url)
+    sig = request.headers.get("stripe-signature", "")
 
     try:
-        webhook_response = await stripe_checkout.handle_webhook(body, sig)
-        logger.info(f"Webhook event: {webhook_response.event_type}, session: {webhook_response.session_id}")
+        if STRIPE_WEBHOOK_SECRET:
+            event = stripe.Webhook.construct_event(body, sig, STRIPE_WEBHOOK_SECRET)
+        else:
+            event = stripe.Event.construct_from(
+                stripe.util.json.loads(body), stripe.api_key
+            )
+    except Exception as e:
+        logger.error(f"Webhook signature verification failed: {e}")
+        raise HTTPException(status_code=400, detail=str(e))
 
-        session_id = webhook_response.session_id
-        payment_status = webhook_response.payment_status
+    logger.info(f"Webhook event: {event.type}")
 
-        # Update transaction
+    if event.type == "checkout.session.completed":
+        session = event.data.object
+        session_id = session.id
+        payment_status = session.payment_status or "unpaid"
+
         txn = await db.payment_transactions.find_one({"session_id": session_id}, {"_id": 0})
         if txn:
             await db.payment_transactions.update_one(
                 {"session_id": session_id},
                 {"$set": {
                     "payment_status": payment_status,
-                    "status": webhook_response.event_type,
-                    "webhook_event_id": webhook_response.event_id,
+                    "status": "completed",
                     "updated_at": datetime.now(timezone.utc).isoformat(),
                 }},
             )
 
-            # Handle payment failure
-            if payment_status in ("unpaid", "failed") and txn.get("payment_status") != payment_status:
-                html = _payment_failure_email(txn["name"], txn["service_title"])
-                await send_email(
-                    txn["email"],
-                    f"Payment Issue - {txn['service_title']}",
-                    html,
-                )
+    elif event.type in ("checkout.session.expired", "payment_intent.payment_failed"):
+        session = event.data.object
+        session_id = getattr(session, "id", "")
 
-        return {"status": "ok"}
-    except Exception as e:
-        logger.error(f"Webhook error: {e}")
-        raise HTTPException(status_code=400, detail=str(e))
+        txn = await db.payment_transactions.find_one({"session_id": session_id}, {"_id": 0})
+        if txn and txn.get("payment_status") not in ("failed", "expired"):
+            await db.payment_transactions.update_one(
+                {"session_id": session_id},
+                {"$set": {
+                    "payment_status": "failed",
+                    "status": event.type,
+                    "updated_at": datetime.now(timezone.utc).isoformat(),
+                }},
+            )
+            html = _payment_failure_email(txn["name"], txn["service_title"])
+            await send_email(
+                txn["email"],
+                f"Payment Issue - {txn['service_title']}",
+                html,
+            )
+
+    return {"status": "ok"}
 
 
 # ─── Send Follow-up Email (manual trigger) ───
