@@ -134,7 +134,7 @@ const ContactSection = () => {
                       style={{ fontFamily: "'Poppins', sans-serif" }}
                       data-testid="contact-sessions"
                     >
-                      Virtual — available worldwide
+                      Virtual
                     </p>
                   </div>
                 </div>
