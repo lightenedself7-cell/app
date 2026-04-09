@@ -35,7 +35,7 @@ const BookingModal = ({ service, onClose }) => {
       };
 
       await axios.post(`${API}/bookings`, bookingData);
-      toast.success("Booking request submitted! We'll confirm your session within 24 hours.");
+      toast.success("Booking request submitted! I'll confirm your session within 24 hours.");
       onClose();
     } catch (error) {
       console.error("Booking error:", error);
@@ -257,9 +257,11 @@ const BookingModal = ({ service, onClose }) => {
               {isSubmitting ? "Submitting..." : "Request Booking"}
             </button>
 
-            <p className="text-xs text-center text-[#B39A8E]" style={{ fontFamily: "'Poppins', sans-serif" }}>
-              We'll send you a confirmation email within 24 hours with payment details and session link.
-            </p>
+              <p
+                className="text-xs text-center text-[#B39A8E]" style={{ fontFamily: "'Poppins', sans-serif" }}
+              >
+                I'll send you a confirmation email within 24 hours with payment details and session link.
+              </p>
           </form>
         </div>
       </div>

@@ -57,14 +57,14 @@ const AboutSection = () => {
                 className="text-base leading-relaxed text-[#B39A8E]"
                 style={{ fontFamily: "'Poppins', sans-serif" }}
               >
-                At LightenedSelf, we believe that true healing comes from within. Our holistic approach combines ancient wisdom with modern practices to guide you on a journey of self-discovery and transformation.
+                At LightenedSelf, I believe that true healing comes from within. My holistic approach combines ancient wisdom with modern practices to guide you on a journey of self-discovery and transformation.
               </p>
 
               <p
                 className="text-base leading-relaxed text-[#B39A8E]"
                 style={{ fontFamily: "'Poppins', sans-serif" }}
               >
-                Based globally, we offer virtual sessions that allow you to experience the profound benefits of energy healing, intuitive readings, and guided meditation from the comfort of your own space.
+                Based globally, I offer virtual sessions that allow you to experience the profound benefits of energy healing, intuitive readings, and guided meditation from the comfort of your own space.
               </p>
             </div>
 
