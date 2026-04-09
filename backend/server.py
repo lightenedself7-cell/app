@@ -43,6 +43,33 @@ class ContactSubmissionCreate(BaseModel):
     interested_in: str
     message: str
 
+class BookingRequest(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    email: EmailStr
+    phone: str = ""
+    date: str
+    time: str
+    service: str
+    price: str
+    duration: str
+    notes: str = ""
+    status: str = "pending"
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class BookingRequestCreate(BaseModel):
+    name: str
+    email: EmailStr
+    phone: str = ""
+    date: str
+    time: str
+    service: str
+    price: str
+    duration: str
+    notes: str = ""
+
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
 async def root():
@@ -75,6 +102,32 @@ async def get_contact_submissions():
             submission['timestamp'] = datetime.fromisoformat(submission['timestamp'])
     
     return submissions
+
+@api_router.post("/bookings", response_model=BookingRequest)
+async def create_booking(input: BookingRequestCreate):
+    try:
+        booking_dict = input.model_dump()
+        booking_obj = BookingRequest(**booking_dict)
+        
+        # Convert to dict and serialize datetime to ISO string for MongoDB
+        doc = booking_obj.model_dump()
+        doc['timestamp'] = doc['timestamp'].isoformat()
+        
+        _ = await db.bookings.insert_one(doc)
+        return booking_obj
+    except Exception as e:
+        logging.error(f"Error creating booking: {e}")
+        raise HTTPException(status_code=500, detail="Failed to create booking")
+
+@api_router.get("/bookings", response_model=List[BookingRequest])
+async def get_bookings():
+    bookings = await db.bookings.find({}, {"_id": 0}).to_list(1000)
+    
+    for booking in bookings:
+        if isinstance(booking['timestamp'], str):
+            booking['timestamp'] = datetime.fromisoformat(booking['timestamp'])
+    
+    return bookings
 
 # Include the router in the main app
 app.include_router(api_router)
