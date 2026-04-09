@@ -3,104 +3,93 @@ import React from "react";
 const services = [
   {
     title: "1:1 Virtual",
-    description: "Personalized virtual healing session.",
-    image: "https://images.unsplash.com/photo-1764258109730-76ba3a917fd0?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHw0fHxtaW5pbWFsaXN0JTIwYm90YW5pY2FsJTIwZ29sZGVuJTIwaG91cnxlbnwwfHx8fDE3NzU2OTkzMzZ8MA&ixlib=rb-4.1.0&q=85",
+    color: "#E6E0D7",
   },
   {
     title: "1:1 Mentorship",
-    description: "Guided spiritual and personal mentorship.",
-    image: "https://images.unsplash.com/photo-1769203902904-f4abce5a9b6f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHwxfHxtaW5pbWFsaXN0JTIwYm90YW5pY2FsJTIwZ29sZGVuJTIwaG91cnxlbnwwfHx8fDE3NzU2OTkzMzZ8MA&ixlib=rb-4.1.0&q=85",
+    color: "#E8D3C5",
   },
   {
     title: "Couple Healing",
-    description: "Realign and reconnect with your partner.",
-    image: "https://images.unsplash.com/photo-1758467614798-93733618b752?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHwzfHxtaW5pbWFsaXN0JTIwYm90YW5pY2FsJTIwZ29sZGVuJTIwaG91cnxlbnwwfHx8fDE3NzU2OTkzMzZ8MA&ixlib=rb-4.1.0&q=85",
+    color: "#AAB4A6",
   },
   {
     title: "Meditation",
-    description: "Deeply restorative guided meditations.",
-    image: "https://images.unsplash.com/photo-1764616683131-862865b9bcf7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTF8MHwxfHNlYXJjaHwzfHxjYWxtJTIwbWVkaXRhdGlvbiUyMGdvbGRlbiUyMGhvdXJ8ZW58MHx8fHwxNzc1Njk5MzM2fDA&ixlib=rb-4.1.0&q=85",
+    color: "#E8D3C5",
   },
   {
     title: "Aura Cleansing",
-    description: "Clear energy blockages and restore balance.",
-    image: "https://images.unsplash.com/photo-1701352344755-33108042e4df?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2ODh8MHwxfHNlYXJjaHwzfHxzZXJlbmUlMjBoZWFsaW5nJTIwc3BhY2UlMjBnb2xkZW4lMjBob3VyfGVufDB8fHx8MTc3NTY5OTM0OHww&ixlib=rb-4.1.0&q=85",
+    color: "#E6E0D7",
   },
   {
     title: "Quick Energy Reset",
-    description: "A brief session to realign your energy.",
-    image: "https://images.unsplash.com/photo-1722713698070-85c7ada9a1c8?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NjV8MHwxfHNlYXJjaHwzfHxzb2Z0JTIwYm90YW5pY2FsJTIwbGVhdmVzJTIwc3VubGlnaHR8ZW58MHx8fHwxNzc1Njk5MzQ4fDA&ixlib=rb-4.1.0&q=85",
+    color: "#546142",
   },
 ];
 
 const ServicesGrid = () => {
   return (
-    <section id="services" className="py-24 px-6 bg-[#E8D3C5]">
-      <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <p
-            className="text-sm uppercase tracking-widest text-[#AAB4A6] mb-3"
-            style={{ fontFamily: "'Poppins', sans-serif" }}
-            data-testid="services-label"
-          >
-            Our Services
-          </p>
-          <h2
-            className="text-4xl md:text-5xl tracking-tight font-medium text-[#546142]"
-            style={{ fontFamily: "'Cormorant Garamond', serif" }}
-            data-testid="services-heading"
-          >
-            Pathways to Healing
-          </h2>
-        </div>
-
+    <section className="py-20 px-6 bg-[#F5F3F0]">
+      <div className="max-w-6xl mx-auto">
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <div
               key={index}
-              className="group relative bg-white rounded-t-[300px] rounded-b-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
+              className="group relative overflow-hidden rounded-t-[120px] rounded-b-xl shadow-[0_4px_20px_rgb(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.1)] transition-all"
+              style={{ backgroundColor: service.color }}
               data-testid={`service-card-${index}`}
             >
-              {/* Image */}
-              <div className="h-80 overflow-hidden">
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+              {/* Botanical Illustration Placeholder */}
+              <div className="h-64 flex items-center justify-center p-8">
+                <svg
+                  viewBox="0 0 200 200"
+                  className="w-32 h-32 opacity-40"
+                  fill="none"
+                  stroke={service.color === "#546142" ? "#E6E0D7" : "#546142"}
+                  strokeWidth="1.5"
+                >
+                  {/* Simple botanical leaf illustration */}
+                  <path d="M100 40 Q120 80 100 120 Q80 80 100 40" />
+                  <path d="M100 50 Q115 75 100 100" />
+                  <path d="M100 50 Q85 75 100 100" />
+                  <path d="M100 70 Q110 85 100 100" />
+                  <path d="M100 70 Q90 85 100 100" />
+                  <line x1="100" y1="120" x2="100" y2="160" />
+                  <path d="M100 130 Q90 135 85 130" />
+                  <path d="M100 145 Q110 150 115 145" />
+                </svg>
               </div>
 
-              {/* Content */}
-              <div className="p-8 text-center space-y-4">
+              {/* Service Title */}
+              <div className="p-6 text-center">
                 <h3
-                  className="text-2xl font-medium text-[#546142]"
-                  style={{ fontFamily: "'Cormorant Garamond', serif" }}
+                  className="text-xl font-normal"
+                  style={{
+                    fontFamily: "'Cormorant Garamond', serif",
+                    color: service.color === "#546142" ? "#E6E0D7" : "#546142",
+                  }}
                   data-testid={`service-title-${index}`}
                 >
                   {service.title}
                 </h3>
-                <p
-                  className="text-base leading-relaxed text-[#738062]"
-                  style={{ fontFamily: "'Poppins', sans-serif" }}
-                  data-testid={`service-description-${index}`}
-                >
-                  {service.description}
-                </p>
-                <a
-                  href="https://zoho.com/bookings"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block mt-4 px-6 py-3 bg-[#B68D6D] text-white rounded-full text-sm font-medium hover:bg-[#A67D5D] transition-all hover:shadow-lg"
-                  style={{ fontFamily: "'Poppins', sans-serif" }}
-                  data-testid={`service-book-button-${index}`}
-                >
-                  Book Now
-                </a>
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Book Now CTA */}
+        <div className="text-center mt-12">
+          <a
+            href="https://zoho.com/bookings"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-12 py-4 bg-[#546142] text-white rounded-full text-base font-medium hover:bg-[#738062] transition-all hover:shadow-lg"
+            style={{ fontFamily: "'Poppins', sans-serif" }}
+            data-testid="book-now-button"
+          >
+            Book a Session
+          </a>
         </div>
       </div>
     </section>

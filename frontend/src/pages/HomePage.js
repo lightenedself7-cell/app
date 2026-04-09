@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
+import ToolsSection from "@/components/ToolsSection";
 import ServicesGrid from "@/components/ServicesGrid";
 import ContactSection from "@/components/ContactSection";
 
 const HomePage = () => {
   return (
-    <div className="min-h-screen bg-[#E6E0D7]">
+    <div className="min-h-screen bg-[#F5F3F0]">
       <Navigation />
       <HeroSection />
+      <ToolsSection />
       <ServicesGrid />
       <ContactSection />
     </div>
