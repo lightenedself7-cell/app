@@ -4,6 +4,7 @@ import HeroSection from "@/components/HeroSection";
 import ToolsSection from "@/components/ToolsSection";
 import ServicesGrid from "@/components/ServicesGrid";
 import ContactSection from "@/components/ContactSection";
+import Footer from "@/components/Footer";
 
 const HomePage = () => {
   return (
@@ -13,6 +14,7 @@ const HomePage = () => {
       <ToolsSection />
       <ServicesGrid />
       <ContactSection />
+      <Footer />
     </div>
   );
 };

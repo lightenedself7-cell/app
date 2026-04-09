@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -10,6 +11,8 @@ import {
 import { ChevronDown } from "lucide-react";
 
 const Navigation = () => {
+  const navigate = useNavigate();
+
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
@@ -18,15 +21,18 @@ const Navigation = () => {
   };
 
   const workWithMeServices = [
-    "1:1 Virtual",
-    "1:1 Mentorship",
-    "Couple Healing",
-    "Meditation",
-    "Aura Cleansing",
-    "Quick Energy Reset",
+    { name: "1:1 Virtual", path: "/work-with-me" },
+    { name: "1:1 Mentorship", path: "/work-with-me" },
+    { name: "Couple Healing", path: "/work-with-me" },
+    { name: "Meditation", section: "services" },
+    { name: "Aura Cleansing", section: "services" },
+    { name: "Quick Energy Reset", section: "services" },
   ];
 
-  const toolsItems = ["Meditations", "Programs"];
+  const toolsItems = [
+    { name: "Meditations", path: "/meditations" },
+    { name: "Programs", path: "/programs" }
+  ];
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-[#E6E0D7]/50 shadow-sm">
@@ -48,7 +54,7 @@ const Navigation = () => {
 
           {/* Centered Logo */}
           <button
-            onClick={() => scrollToSection("home")}
+            onClick={() => navigate('/')}
             className="absolute left-1/2 -translate-x-1/2 text-xl tracking-[0.3em] font-normal text-[#546142] hover:text-[#738062] transition-colors"
             style={{ fontFamily: "'Cormorant Garamond', serif" }}
             data-testid="logo-button"
@@ -74,12 +80,19 @@ const Navigation = () => {
                     {workWithMeServices.map((service, index) => (
                       <li key={index}>
                         <button
-                          onClick={() => scrollToSection("services")}
+                          onClick={() => {
+                            if (service.path) {
+                              navigate(service.path);
+                            } else if (service.section) {
+                              navigate('/');
+                              setTimeout(() => scrollToSection(service.section), 100);
+                            }
+                          }}
                           className="block w-full text-left select-none rounded-lg p-3 leading-none no-underline outline-none transition-colors hover:bg-[#E8D3C5]/30 focus:bg-[#E8D3C5]/30 text-[#546142]"
                           style={{ fontFamily: "'Poppins', sans-serif" }}
                           data-testid={`nav-service-${index}`}
                         >
-                          <div className="text-sm font-medium">{service}</div>
+                          <div className="text-sm font-medium">{service.name}</div>
                         </button>
                       </li>
                     ))}
@@ -102,12 +115,12 @@ const Navigation = () => {
                     {toolsItems.map((item, index) => (
                       <li key={index}>
                         <button
-                          onClick={() => scrollToSection("tools")}
+                          onClick={() => navigate(item.path)}
                           className="block w-full text-left select-none rounded-lg p-3 leading-none no-underline outline-none transition-colors hover:bg-[#E8D3C5]/30 focus:bg-[#E8D3C5]/30 text-[#546142]"
                           style={{ fontFamily: "'Poppins', sans-serif" }}
                           data-testid={`nav-tool-${index}`}
                         >
-                          <div className="text-sm font-medium">{item}</div>
+                          <div className="text-sm font-medium">{item.name}</div>
                         </button>
                       </li>
                     ))}
@@ -118,7 +131,10 @@ const Navigation = () => {
               {/* Contact */}
               <NavigationMenuItem>
                 <button
-                  onClick={() => scrollToSection("contact")}
+                  onClick={() => {
+                    navigate('/');
+                    setTimeout(() => scrollToSection('contact'), 100);
+                  }}
                   className="text-xs uppercase tracking-[0.2em] text-[#546142] hover:text-[#738062] transition-colors font-medium"
                   style={{ fontFamily: "'Poppins', sans-serif" }}
                   data-testid="nav-contact"
