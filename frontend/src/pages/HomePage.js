@@ -3,6 +3,8 @@ import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 import ToolsSection from "@/components/ToolsSection";
 import ServicesGrid from "@/components/ServicesGrid";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import CTASection from "@/components/CTASection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 
@@ -13,6 +15,8 @@ const HomePage = () => {
       <HeroSection />
       <ToolsSection />
       <ServicesGrid />
+      <TestimonialsSection />
+      <CTASection />
       <ContactSection />
       <Footer />
     </div>

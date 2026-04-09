@@ -1,58 +1,105 @@
 import React from "react";
 
 const HeroSection = () => {
-  return (
-    <section id="home" className="min-h-screen flex items-center justify-center bg-[#F5F3F0] pt-24 pb-16 px-6">
-      <div className="max-w-6xl w-full">
-        {/* Hero Card with Divine Glow */}
-        <div className="relative bg-white rounded-3xl shadow-[0_20px_60px_rgb(0,0,0,0.08)] p-12 md:p-20">
-          {/* Subtle Divine Glow Effect */}
-          <div className="absolute -inset-0.5 bg-gradient-to-br from-[#E8D3C5]/20 via-white to-[#AAB4A6]/20 rounded-3xl blur-xl opacity-60 -z-10"></div>
-          
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            {/* Left - Hero Content */}
-            <div className="space-y-8">
-              <h1
-                className="text-5xl md:text-6xl tracking-tight font-normal text-[#546142] leading-tight"
-                style={{ fontFamily: "'Cormorant Garamond', serif" }}
-                data-testid="hero-heading"
-              >
-                Your Light,
-                <br />
-                Unbound.
-              </h1>
-              
-              <p
-                className="text-lg md:text-xl leading-relaxed text-[#738062]"
-                style={{ fontFamily: "'Poppins', sans-serif" }}
-                data-testid="hero-subheading"
-              >
-                Bespoke energy healing and soul-led mentorship for the global collective. Accessible from anywhere in the world.
-              </p>
-              
-              <button
-                onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-10 py-4 bg-[#546142] text-white rounded-full text-sm font-medium uppercase tracking-wider hover:bg-[#738062] transition-all hover:shadow-xl"
-                style={{ fontFamily: "'Poppins', sans-serif" }}
-                data-testid="hero-cta-button"
-              >
-                Explore Services
-              </button>
-            </div>
+  const scrollToServices = () => {
+    const element = document.getElementById('services');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
-            {/* Right - Arch Image */}
-            <div className="relative">
-              <div className="relative overflow-hidden rounded-t-[200px] rounded-b-xl shadow-xl" data-testid="hero-image-container">
-                <img
-                  src="https://images.unsplash.com/photo-1768977148978-c7d49cd573cf?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NjV8MHwxfHNlYXJjaHw0fHxzb2Z0JTIwYm90YW5pY2FsJTIwbGVhdmVzJTIwc3VubGlnaHR8ZW58MHx8fHwxNzc1Njk5MzQ4fDA&ixlib=rb-4.1.0&q=85"
-                  alt="Sunlight through botanical leaves"
-                  className="w-full h-[450px] object-cover"
-                />
-                {/* Divine glow overlay on image */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#E8D3C5]/10 to-transparent"></div>
-              </div>
-            </div>
+  const scrollToTools = () => {
+    const element = document.getElementById('tools');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <section 
+      id="home" 
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
+      style={{
+        background: 'linear-gradient(135deg, rgba(230, 224, 215, 0.4) 0%, rgba(232, 211, 197, 0.6) 50%, rgba(170, 180, 166, 0.3) 100%)'
+      }}
+    >
+      {/* Glowing Orb Effect */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Main Central Glow */}
+        <div 
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-30"
+          style={{
+            background: 'radial-gradient(circle, rgba(232, 211, 197, 0.8) 0%, rgba(230, 224, 215, 0.4) 40%, transparent 70%)'
+          }}
+        ></div>
+        
+        {/* Floating Light Particles */}
+        <div className="absolute top-20 left-1/4 w-3 h-3 bg-white rounded-full opacity-60 animate-pulse"></div>
+        <div className="absolute top-1/3 right-1/4 w-2 h-2 bg-white rounded-full opacity-50 animate-pulse" style={{animationDelay: '1s'}}></div>
+        <div className="absolute bottom-1/3 left-1/3 w-2.5 h-2.5 bg-white rounded-full opacity-40 animate-pulse" style={{animationDelay: '2s'}}></div>
+        <div className="absolute top-2/3 right-1/3 w-2 h-2 bg-white rounded-full opacity-70 animate-pulse" style={{animationDelay: '0.5s'}}></div>
+        <div className="absolute bottom-40 left-1/2 w-3 h-3 bg-white rounded-full opacity-50 animate-pulse" style={{animationDelay: '1.5s'}}></div>
+        
+        {/* Circular Glow Rings */}
+        <div 
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full border border-white/20"
+        ></div>
+        <div 
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full border border-white/10"
+        ></div>
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
+        {/* Small Label */}
+        <p
+          className="text-xs uppercase tracking-[0.3em] text-[#AAB4A6] mb-6"
+          style={{ fontFamily: "'Poppins', sans-serif" }}
+        >
+          Welcome to Your Healing Journey
+        </p>
+
+        {/* Main Heading */}
+        <h1
+          className="mb-8"
+          style={{ fontFamily: "'Cormorant Garamond', serif" }}
+          data-testid="hero-heading"
+        >
+          <div className="text-5xl md:text-6xl lg:text-7xl font-normal text-[#546142] leading-tight">
+            Lightened
           </div>
+          <div className="text-5xl md:text-6xl lg:text-7xl font-normal italic text-[#B68D6D] leading-tight">
+            Self
+          </div>
+        </h1>
+
+        {/* Description */}
+        <p
+          className="text-lg md:text-xl leading-relaxed text-[#738062] mb-12 max-w-2xl mx-auto"
+          style={{ fontFamily: "'Poppins', sans-serif" }}
+          data-testid="hero-description"
+        >
+          Illuminate your path to inner peace through energy healing, spiritual mentorship, and transformative wellness practices.
+        </p>
+
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <button
+            onClick={scrollToServices}
+            className="px-8 py-4 bg-[#B68D6D] text-white rounded-full text-sm font-medium uppercase tracking-wider hover:bg-[#A67D5D] transition-all hover:shadow-xl flex items-center gap-2"
+            style={{ fontFamily: "'Poppins', sans-serif" }}
+            data-testid="hero-cta-primary"
+          >
+            Begin Your Journey →
+          </button>
+          <button
+            onClick={scrollToTools}
+            className="px-8 py-4 bg-transparent border-2 border-[#546142] text-[#546142] rounded-full text-sm font-medium uppercase tracking-wider hover:bg-[#546142] hover:text-white transition-all"
+            style={{ fontFamily: "'Poppins', sans-serif" }}
+            data-testid="hero-cta-secondary"
+          >
+            Explore Tools
+          </button>
         </div>
       </div>
     </section>
