@@ -1,10 +1,19 @@
 import React, { useState } from "react";
-import { X, Calendar, Clock, Mail, User, Phone } from "lucide-react";
+import { X, Calendar, Clock, Mail, User, Phone, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import axios from "axios";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
+
+const SERVICE_ID_MAP = {
+  "Energy Healing Session": "energy-healing-session",
+  "Intuitive Reading": "intuitive-reading",
+  "Guided Meditation": "guided-meditation",
+  "Inner Transformation Workshop": "inner-transformation-workshop",
+  "1:1 Spiritual Mentorship": "1-1-spiritual-mentorship",
+  "Couple Healing Journey": "couple-healing-journey",
+};
 
 const BookingModal = ({ service, onClose }) => {
   const [formData, setFormData] = useState({
@@ -13,13 +22,13 @@ const BookingModal = ({ service, onClose }) => {
     phone: "",
     date: "",
     time: "",
-    notes: ""
+    notes: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
@@ -27,35 +36,46 @@ const BookingModal = ({ service, onClose }) => {
     setIsSubmitting(true);
 
     try {
-      const bookingData = {
-        ...formData,
-        service: service.title,
-        price: service.price,
-        duration: service.duration
-      };
+      const serviceId = SERVICE_ID_MAP[service.title];
+      if (!serviceId) {
+        toast.error("Service not recognized. Please try again.");
+        setIsSubmitting(false);
+        return;
+      }
 
-      await axios.post(`${API}/bookings`, bookingData);
-      toast.success("Booking request submitted! I'll confirm your session within 24 hours.");
-      onClose();
+      const response = await axios.post(`${API}/create-checkout-session`, {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        date: formData.date,
+        time: formData.time,
+        service_id: serviceId,
+        notes: formData.notes,
+        origin_url: window.location.origin,
+      });
+
+      if (response.data.url) {
+        window.location.href = response.data.url;
+      } else {
+        toast.error("Could not initiate payment. Please try again.");
+      }
     } catch (error) {
-      console.error("Booking error:", error);
-      toast.error("Failed to submit booking. Please try again or contact us directly.");
+      console.error("Checkout error:", error);
+      toast.error("Something went wrong. Please try again or contact me directly.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  // Generate time slots
   const timeSlots = [
     "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM",
     "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM",
-    "5:00 PM", "6:00 PM", "7:00 PM"
+    "5:00 PM", "6:00 PM", "7:00 PM",
   ];
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
       <div className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl max-h-[90vh] overflow-y-auto">
-        {/* Close Button */}
         <button
           onClick={onClose}
           className="absolute top-6 right-6 p-2 hover:bg-[#F5E8E2] rounded-full transition-colors"
@@ -64,9 +84,7 @@ const BookingModal = ({ service, onClose }) => {
           <X className="w-5 h-5 text-[#9B8376]" />
         </button>
 
-        {/* Modal Content */}
         <div className="p-10">
-          {/* Header */}
           <div className="mb-8">
             <p
               className="text-xs uppercase tracking-[0.3em] text-[#B39A8E] mb-3"
@@ -80,7 +98,10 @@ const BookingModal = ({ service, onClose }) => {
             >
               {service.title}
             </h2>
-            <div className="flex items-center gap-6 text-sm text-[#B39A8E]" style={{ fontFamily: "'Poppins', sans-serif" }}>
+            <div
+              className="flex items-center gap-6 text-sm text-[#B39A8E]"
+              style={{ fontFamily: "'Poppins', sans-serif" }}
+            >
               <div className="flex items-center gap-2">
                 <Clock className="w-4 h-4" />
                 {service.duration}
@@ -91,7 +112,6 @@ const BookingModal = ({ service, onClose }) => {
             </div>
           </div>
 
-          {/* Booking Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Name */}
             <div>
@@ -143,7 +163,6 @@ const BookingModal = ({ service, onClose }) => {
                   />
                 </div>
               </div>
-
               <div>
                 <label
                   htmlFor="phone"
@@ -187,14 +206,13 @@ const BookingModal = ({ service, onClose }) => {
                     value={formData.date}
                     onChange={handleChange}
                     required
-                    min={new Date().toISOString().split('T')[0]}
+                    min={new Date().toISOString().split("T")[0]}
                     className="w-full pl-12 pr-4 py-3 border-2 border-[#E8D4CC] rounded-xl focus:outline-none focus:border-[#C79B87] text-[#9B8376]"
                     style={{ fontFamily: "'Poppins', sans-serif" }}
                     data-testid="booking-date"
                   />
                 </div>
               </div>
-
               <div>
                 <label
                   htmlFor="time"
@@ -217,7 +235,9 @@ const BookingModal = ({ service, onClose }) => {
                   >
                     <option value="">Select time</option>
                     {timeSlots.map((slot, index) => (
-                      <option key={index} value={slot}>{slot}</option>
+                      <option key={index} value={slot}>
+                        {slot}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -250,18 +270,27 @@ const BookingModal = ({ service, onClose }) => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full px-8 py-4 bg-[#8B9481] text-white rounded-full text-sm font-medium uppercase tracking-wider hover:bg-[#757F6E] transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+              className="w-full px-8 py-4 bg-[#8B9481] text-white rounded-full text-sm font-medium uppercase tracking-wider hover:bg-[#757F6E] transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl flex items-center justify-center gap-3"
               style={{ fontFamily: "'Poppins', sans-serif" }}
               data-testid="booking-submit"
             >
-              {isSubmitting ? "Submitting..." : "Request Booking"}
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  Redirecting to Payment...
+                </>
+              ) : (
+                "Proceed to Payment"
+              )}
             </button>
 
-              <p
-                className="text-xs text-center text-[#B39A8E]" style={{ fontFamily: "'Poppins', sans-serif" }}
-              >
-                I'll send you a confirmation email within 24 hours with payment details and session link.
-              </p>
+            <p
+              className="text-xs text-center text-[#B39A8E]"
+              style={{ fontFamily: "'Poppins', sans-serif" }}
+            >
+              You'll be securely redirected to Stripe to complete your payment.
+              A confirmation email will follow.
+            </p>
           </form>
         </div>
       </div>
