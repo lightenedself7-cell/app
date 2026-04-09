@@ -1,0 +1,120 @@
+{
+  "theme": "light",
+  "archetype": "1 (Organic & Earthy)",
+  "colors": {
+    "background": {
+      "primary": "#E6E0D7",
+      "secondary": "#E8D3C5",
+      "white": "#FFFFFF"
+    },
+    "text": {
+      "primary": "#546142",
+      "secondary": "#738062",
+      "muted": "#AAB4A6"
+    },
+    "brand": {
+      "primary": "#B68D6D",
+      "secondary": "#546142",
+      "accent1": "#AAB4A6",
+      "accent2": "#738062"
+    }
+  },
+  "typography": {
+    "fonts": {
+      "heading": "Cormorant Garamond, serif",
+      "body": "Poppins, sans-serif"
+    },
+    "sizing": {
+      "h1": "text-5xl md:text-6xl tracking-tight leading-none font-medium",
+      "h2": "text-4xl md:text-5xl tracking-tight font-medium",
+      "h3": "text-2xl md:text-3xl font-medium",
+      "h4": "text-xl font-medium",
+      "body": "text-base md:text-lg leading-relaxed",
+      "small": "text-sm uppercase tracking-widest"
+    }
+  },
+  "layout": {
+    "spacing": "Generous spacing. Use p-8 to p-24 for section padding.",
+    "border_radius": "Use full rounded for buttons (rounded-full). Use arch shapes for service cards (rounded-t-full rounded-b-md or rounded-t-[500px]).",
+    "grids": "Services section must use a 3x2 grid (grid-cols-1 md:grid-cols-2 lg:grid-cols-3) with gap-8 or gap-12."
+  },
+  "components": {
+    "navigation": {
+      "style": "Sticky, glassmorphism (backdrop-blur-md bg-[#E6E0D7]/80) or solid oatmeal background (z-50). Centered Logo.",
+      "logo": "Text 'Lightened Self' in Cormorant Garamond, text-2xl or 3xl.",
+      "links": "HOME, WORK WITH ME (Dropdown), TOOLS (Dropdown), CONTACT. Use Poppins text-sm tracking-widest.",
+      "dropdowns": "WORK WITH ME: 1:1 Virtual, 1:1 Mentorship, Couple Healing, Meditation, Aura Cleansing, Quick Energy Reset. TOOLS: Meditations, Programs.",
+      "cta": "CLIENT LOGIN. Warm Terracotta (#B68D6D), rounded-full, Poppins."
+    },
+    "hero": {
+      "style": "Large layered 'Organic Overlay' design. Arch-masked hero image. Soft radial glow (use absolute positioned divs with blur-3xl and Blush Pink/Sage Green colors behind the image).",
+      "heading": "Your Light, Unbound.",
+      "image": "Arch masked image."
+    },
+    "services_grid": {
+      "style": "3x2 symmetrical grid of chic vertical arches.",
+      "card_style": "Arch shape (rounded-t-full). Image fills the top half of the arch. Content below.",
+      "button": "Book Now button linking to Zoho Bookings. Use #B68D6D text or background."
+    },
+    "contact_section": {
+      "style": "Two column layout. Left text, right form.",
+      "header": "Small caps 'Get in Touch', large serif 'Contact'.",
+      "left_column": "Text: 'Let\\'s start your healing journey'. Icons for Email, Response Time, Sessions.",
+      "right_column": "Clean rounded white contact form. Fields: Name, Email, Interested In (Dropdown), Message.",
+      "submit_button": "#B68D6D, paper plane icon, 'SEND MESSAGE'."
+    }
+  },
+  "media": {
+    "hero_image": {
+      "url": "https://images.unsplash.com/photo-1768977148978-c7d49cd573cf?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NjV8MHwxfHNlYXJjaHw0fHxzb2Z0JTIwYm90YW5pY2FsJTIwbGVhdmVzJTIwc3VubGlnaHR8ZW58MHx8fHwxNzc1Njk5MzQ4fDA&ixlib=rb-4.1.0&q=85",
+      "alt": "Sunlight streams through hanging plants at sunset"
+    },
+    "services": [
+      {
+        "title": "1:1 Virtual",
+        "description": "Personalized virtual healing session.",
+        "url": "https://images.unsplash.com/photo-1764258109730-76ba3a917fd0?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHw0fHxtaW5pbWFsaXN0JTIwYm90YW5pY2FsJTIwZ29sZGVuJTIwaG91cnxlbnwwfHx8fDE3NzU2OTkzMzZ8MA&ixlib=rb-4.1.0&q=85"
+      },
+      {
+        "title": "1:1 Mentorship",
+        "description": "Guided spiritual and personal mentorship.",
+        "url": "https://images.unsplash.com/photo-1769203902904-f4abce5a9b6f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHwxfHxtaW5pbWFsaXN0JTIwYm90YW5pY2FsJTIwZ29sZGVuJTIwaG91cnxlbnwwfHx8fDE3NzU2OTkzMzZ8MA&ixlib=rb-4.1.0&q=85"
+      },
+      {
+        "title": "Couple Healing",
+        "description": "Realign and reconnect with your partner.",
+        "url": "https://images.unsplash.com/photo-1758467614798-93733618b752?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHwzfHxtaW5pbWFsaXN0JTIwYm90YW5pY2FsJTIwZ29sZGVuJTIwaG91cnxlbnwwfHx8fDE3NzU2OTkzMzZ8MA&ixlib=rb-4.1.0&q=85"
+      },
+      {
+        "title": "Meditation",
+        "description": "Deeply restorative guided meditations.",
+        "url": "https://images.unsplash.com/photo-1764616683131-862865b9bcf7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTF8MHwxfHNlYXJjaHwzfHxjYWxtJTIwbWVkaXRhdGlvbiUyMGdvbGRlbiUyMGhvdXJ8ZW58MHx8fHwxNzc1Njk5MzM2fDA&ixlib=rb-4.1.0&q=85"
+      },
+      {
+        "title": "Aura Cleansing",
+        "description": "Clear energy blockages and restore balance.",
+        "url": "https://images.unsplash.com/photo-1701352344755-33108042e4df?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2ODh8MHwxfHNlYXJjaHwzfHxzZXJlbmUlMjBoZWFsaW5nJTIwc3BhY2UlMjBnb2xkZW4lMjBob3VyfGVufDB8fHx8MTc3NTY5OTM0OHww&ixlib=rb-4.1.0&q=85"
+      },
+      {
+        "title": "Quick Energy Reset",
+        "description": "A brief session to realign your energy.",
+        "url": "https://images.unsplash.com/photo-1722713698070-85c7ada9a1c8?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NjV8MHwxfHNlYXJjaHwzfHxzb2Z0JTIwYm90YW5pY2FsJTIwbGVhdmVzJTIwc3VubGlnaHR8ZW58MHx8fHwxNzc1Njk5MzQ4fDA&ixlib=rb-4.1.0&q=85"
+      }
+    ]
+  },
+  "interactions": {
+    "hover": "Smooth color transitions for buttons. Slight lift (-translate-y-1) and shadow on service cards.",
+    "links": "Underline animation on hover for navigation."
+  },
+  "instructions_to_main_agent": [
+    "Ensure 'Cormorant Garamond' and 'Poppins' are imported via Google Fonts in the HTML or global CSS.",
+    "Use Tailwind arbitrary values perfectly to match the hex codes provided (e.g. bg-[#B68D6D]).",
+    "For the Services Grid, structure the cards with `rounded-t-full` or `rounded-t-[300px]` (or similar arch radius) to create the arch shape. Ensure `overflow-hidden` so images stay within the arch.",
+    "For the Hero Section, create an 'organic overlay' by combining an arch-masked image with absolute positioned, heavily blurred circular divs (blur-[100px] or blur-3xl) in Blush Pink (#E8D3C5) and Sage Green (#738062) to simulate a soft radial glow.",
+    "Ensure the sticky menu works nicely. The 'WORK WITH ME' and 'TOOLS' items should trigger dropdowns (can use Shadcn UI DropdownMenu or native relative/absolute hover implementations).",
+    "Add `id` to each major section (e.g., `id=\"home\"`, `id=\"services\"`, `id=\"contact\"`) to allow smooth scrolling from the navigation menu. This mimics Carrd's Section Break functionality.",
+    "Ensure text contrast meets accessibility standards; use Dark Olive (#546142) text on Oatmeal and Blush backgrounds.",
+    "Include 'data-testid' attributes on all interactive elements: buttons, form inputs, navigation links.",
+    "Lucide-react icons to use: 'Mail' for email, 'Clock' for response time, 'MapPin' for sessions, 'Send' (paper plane) for the submit button."
+  ]
+}
