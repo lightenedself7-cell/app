@@ -3,6 +3,7 @@ import React from "react";
 const services = [
   {
     title: "1:1 Virtual",
+    subtitle: "Global focus",
     color: "#E6E0D7",
     illustration: (
       <svg viewBox="0 0 120 160" className="w-24 h-32 opacity-40" fill="none" stroke="#546142" strokeWidth="1.2">
@@ -104,41 +105,57 @@ const services = [
 
 const ServicesGrid = () => {
   return (
-    <section className="py-20 px-6 bg-[#F5F3F0]">
+    <section id="services" className="py-24 px-6 bg-[#F5F3F0]">
       <div className="max-w-6xl mx-auto">
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Services Grid - The Chic Arches */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <div
               key={index}
-              className="group relative overflow-hidden rounded-t-[120px] rounded-b-xl shadow-[0_4px_20px_rgb(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.1)] transition-all"
+              className="group relative overflow-hidden rounded-t-[140px] rounded-b-2xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:shadow-[0_16px_50px_rgb(0,0,0,0.12)] transition-all duration-300"
               style={{ backgroundColor: service.color }}
               data-testid={`service-card-${index}`}
             >
+              {/* Divine glow on hover */}
+              <div className="absolute -inset-1 bg-gradient-to-br from-white/40 via-transparent to-white/20 rounded-t-[140px] rounded-b-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></div>
+              
               {/* Botanical Illustration */}
-              <div className="h-56 flex items-center justify-center p-8">
+              <div className="relative h-60 flex items-center justify-center p-8">
                 {service.illustration}
               </div>
 
               {/* Service Title & Button */}
-              <div className="p-6 pb-8 text-center space-y-4">
-                <h3
-                  className="text-xl font-normal mb-4"
-                  style={{
-                    fontFamily: "'Cormorant Garamond', serif",
-                    color: service.color === "#546142" ? "#E6E0D7" : "#546142",
-                  }}
-                  data-testid={`service-title-${index}`}
-                >
-                  {service.title}
-                </h3>
+              <div className="relative p-6 pb-8 text-center space-y-4">
+                <div>
+                  <h3
+                    className="text-xl font-normal mb-1"
+                    style={{
+                      fontFamily: "'Cormorant Garamond', serif",
+                      color: service.color === "#546142" ? "#E6E0D7" : "#546142",
+                    }}
+                    data-testid={`service-title-${index}`}
+                  >
+                    {service.title}
+                  </h3>
+                  {service.subtitle && (
+                    <p
+                      className="text-xs uppercase tracking-wider opacity-70"
+                      style={{
+                        fontFamily: "'Poppins', sans-serif",
+                        color: service.color === "#546142" ? "#E6E0D7" : "#738062",
+                      }}
+                    >
+                      {service.subtitle}
+                    </p>
+                  )}
+                </div>
                 
-                {/* Book Now Button */}
+                {/* Book Session Button */}
                 <a
                   href="https://zoho.com/bookings"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block px-6 py-2.5 rounded-full text-xs font-medium uppercase tracking-wider transition-all hover:shadow-md"
+                  className="inline-block px-7 py-3 rounded-full text-xs font-medium uppercase tracking-wider transition-all hover:shadow-lg"
                   style={{
                     fontFamily: "'Poppins', sans-serif",
                     backgroundColor: service.color === "#546142" ? "#E6E0D7" : "#546142",
@@ -146,7 +163,7 @@ const ServicesGrid = () => {
                   }}
                   data-testid={`service-book-button-${index}`}
                 >
-                  Book Now
+                  Book Session
                 </a>
               </div>
             </div>
