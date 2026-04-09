@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
 
 * {
   margin: 0;
@@ -14,19 +14,20 @@ body {
   font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #FAF8F5;
+  background-color: #FDF9F4;
 }
 
 :root {
-  --color-bg-primary: #FAF8F5;
-  --color-bg-secondary: #F5F2EE;
+  --color-bg-primary: #FDF9F4;
+  --color-bg-secondary: #F5E8E2;
   --color-bg-card: #FFFFFF;
-  --color-text-primary: #8B7D6B;
-  --color-text-secondary: #A89A8A;
-  --color-text-muted: #C4B8AA;
-  --color-accent-sage: #A8B5A7;
-  --color-accent-pink: #E8C9C1;
-  --color-accent-gold: #C9A875;
-  --color-button-primary: #8B9481;
-  --color-button-hover: #757F6E;
+  --color-text-primary: #9B8376;
+  --color-text-secondary: #B39A8E;
+  --color-text-muted: #D4C4BC;
+  --color-accent-rose: #E8D4CC;
+  --color-accent-peach: #F5E8E2;
+  --color-accent-gold: #D4A894;
+  --color-button-primary: #C79B87;
+  --color-button-hover: #B88A76;
+  --color-nav-bar: #C9A895;
 }
