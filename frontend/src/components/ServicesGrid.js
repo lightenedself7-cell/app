@@ -9,7 +9,7 @@ const services = [
     description: "A transformative energy healing session to restore balance, release blockages, and promote deep inner healing. Experience the gentle yet powerful shift as we work together to clear stagnant energy and realign your chakras.",
     duration: "60 min",
     price: "$120",
-    image: "https://images.unsplash.com/photo-1552693673-1bf958298935?w=800&q=80"
+    image: "https://images.unsplash.com/photo-1627289601745-5813e24c9bc1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzF8MHwxfHNlYXJjaHwyfHxoZWFsaW5nJTIwY3J5c3RhbHMlMjBzdG9uZXMlMjBlbmVyZ3klMjByZWlraXxlbnwwfHx8fDE3NzU3NDMxMzN8MA&ixlib=rb-4.1.0&q=85"
   },
   {
     category: "INTUITIVE READINGS",
@@ -17,7 +17,7 @@ const services = [
     description: "Gain clarity and guidance through an intuitive reading. Connect with your inner wisdom and receive insights for your life path and personal evolution. Discover the answers that have been waiting within you.",
     duration: "45 min",
     price: "$95",
-    image: "https://images.unsplash.com/photo-1614113489855-66422ad300a4?w=800&q=80"
+    image: "https://images.unsplash.com/photo-1761706280181-2c6e27098288?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Njl8MHwxfHNlYXJjaHwyfHx0YXJvdCUyMGNhcmRzJTIwb3JhY2xlJTIwc3Bpcml0dWFsJTIwcmVhZGluZ3xlbnwwfHx8fDE3NzU3NDMxMzd8MA&ixlib=rb-4.1.0&q=85"
   },
   {
     category: "MEDITATION",
@@ -25,7 +25,7 @@ const services = [
     description: "A peaceful guided meditation session to calm your mind, reduce stress, and connect with your inner stillness. Perfect for beginners and experienced meditators seeking deeper states of presence and peace.",
     duration: "30 min",
     price: "$55",
-    image: "https://images.unsplash.com/photo-1545389336-cf090694435e?w=800&q=80"
+    image: "https://images.unsplash.com/photo-1598826739205-d09823c3bc3d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1ODF8MHwxfHNlYXJjaHwyfHxwZWFjZWZ1bCUyMG1lZGl0YXRpb24lMjBuYXR1cmUlMjB6ZW4lMjBtaW5kZnVsbmVzc3xlbnwwfHx8fDE3NzU3NDMxNDF8MA&ixlib=rb-4.1.0&q=85"
   },
   {
     category: "WORKSHOPS",
@@ -33,7 +33,7 @@ const services = [
     description: "A comprehensive workshop series designed to guide you through profound inner transformation. Learn powerful techniques for personal growth, energy work, and spiritual awakening in a supportive group setting.",
     duration: "120 min",
     price: "$199",
-    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&q=80"
+    image: "https://images.unsplash.com/photo-1740904259629-2826025b252f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2MDV8MHwxfHNlYXJjaHwyfHxjYW5kbGVzJTIwaW5jZW5zZSUyMHNwaXJpdHVhbCUyMGFtYmlhbmNlfGVufDB8fHx8MTc3NTc0MzE0OXww&ixlib=rb-4.1.0&q=85"
   },
   {
     category: "MENTORSHIP",
@@ -41,7 +41,7 @@ const services = [
     description: "Ongoing spiritual guidance and support for your personal evolution journey. Receive personalized practices, weekly check-ins, and deep transformational work tailored to your unique path and soul's calling.",
     duration: "Monthly",
     price: "$450",
-    image: "https://images.unsplash.com/photo-1528715471579-d1bcf0ba5e83?w=800&q=80"
+    image: "https://images.unsplash.com/photo-1757066033671-ad91106a7459?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTN8MHwxfHNlYXJjaHwyfHxzcGlyaXR1YWwlMjBndWlkYW5jZSUyMG1lbnRvcnNoaXAlMjBjb2FjaGluZ3xlbnwwfHx8fDE3NzU3NDMxNTl8MA&ixlib=rb-4.1.0&q=85"
   },
   {
     category: "COUPLES HEALING",
@@ -49,7 +49,7 @@ const services = [
     description: "Restore harmony and deepen connection through guided energy work designed for couples. Release old patterns, heal wounds together, and create a stronger foundation of love, trust, and authentic communication.",
     duration: "90 min",
     price: "$180",
-    image: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=800&q=80"
+    image: "https://images.unsplash.com/photo-1745946596837-0393d87a1706?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzh8MHwxfHNlYXJjaHwyfHxjb3VwbGUlMjBob2xkaW5nJTIwaGFuZHMlMjBsb3ZlJTIwY29ubmVjdGlvbnxlbnwwfHx8fDE3NzU3NDMxNTV8MA&ixlib=rb-4.1.0&q=85"
   }
 ];
 
