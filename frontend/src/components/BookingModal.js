@@ -31,6 +31,8 @@ const BookingModal = ({ service, onClose }) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const [redirectUrl, setRedirectUrl] = useState(null);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -55,14 +57,15 @@ const BookingModal = ({ service, onClose }) => {
       });
 
       if (response.data.url) {
+        setRedirectUrl(response.data.url);
         window.location.href = response.data.url;
       } else {
         toast.error("Could not initiate payment. Please try again.");
+        setIsSubmitting(false);
       }
     } catch (error) {
       console.error("Checkout error:", error);
       toast.error("Something went wrong. Please try again or contact me directly.");
-    } finally {
       setIsSubmitting(false);
     }
   };
@@ -284,13 +287,26 @@ const BookingModal = ({ service, onClose }) => {
               )}
             </button>
 
-            <p
-              className="text-xs text-center text-[#B39A8E]"
-              style={{ fontFamily: "'Poppins', sans-serif" }}
-            >
-              You'll be securely redirected to Stripe to complete your payment.
-              A confirmation email will follow.
-            </p>
+            {redirectUrl && (
+              <a
+                href={redirectUrl}
+                className="block text-center text-sm text-[#C79B87] underline mt-2"
+                style={{ fontFamily: "'Poppins', sans-serif" }}
+                data-testid="manual-redirect-link"
+              >
+                Click here if you're not redirected automatically
+              </a>
+            )}
+
+            {!redirectUrl && (
+              <p
+                className="text-xs text-center text-[#B39A8E]"
+                style={{ fontFamily: "'Poppins', sans-serif" }}
+              >
+                You'll be securely redirected to Stripe to complete your payment.
+                A confirmation email will follow.
+              </p>
+            )}
           </form>
         </div>
       </div>
