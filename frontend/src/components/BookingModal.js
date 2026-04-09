@@ -11,7 +11,7 @@ const SERVICE_ID_MAP = {
   "Intuitive Reading": "intuitive-reading",
   "Guided Meditation": "guided-meditation",
   "Inner Transformation Workshop": "inner-transformation-workshop",
-  "1:1 Spiritual Mentorship": "1-1-spiritual-mentorship",
+  "1:1 Mentoring": "1-1-spiritual-mentorship",
   "Couple Healing Journey": "couple-healing-journey",
 };
 

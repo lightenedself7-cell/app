@@ -36,8 +36,8 @@ const services = [
     image: "https://images.unsplash.com/photo-1740904259629-2826025b252f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2MDV8MHwxfHNlYXJjaHwyfHxjYW5kbGVzJTIwaW5jZW5zZSUyMHNwaXJpdHVhbCUyMGFtYmlhbmNlfGVufDB8fHx8MTc3NTc0MzE0OXww&ixlib=rb-4.1.0&q=85"
   },
   {
-    category: "MENTORSHIP",
-    title: "1:1 Spiritual Mentorship",
+    category: "MENTORING",
+    title: "1:1 Mentoring",
     description: "Ongoing spiritual guidance and support for your personal evolution journey. Receive personalized practices, weekly check-ins, and deep transformational work tailored to your unique path and soul's calling.",
     duration: "Monthly",
     price: "$450",

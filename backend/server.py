@@ -70,7 +70,7 @@ SERVICE_PACKAGES: Dict[str, dict] = {
         "duration": "120 min",
     },
     "1-1-spiritual-mentorship": {
-        "title": "1:1 Spiritual Mentorship",
+        "title": "1:1 Mentoring",
         "price": 450.00,
         "duration": "Monthly",
     },
