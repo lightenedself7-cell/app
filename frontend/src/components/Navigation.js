@@ -47,6 +47,7 @@ const Navigation = () => {
       }
     } else if (item.path) {
       navigate(item.path);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } else if (item.section) {
       const currentPath = window.location.pathname;
       if (currentPath === '/') {
