@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 70" fill="none">
+  <!-- Outer egg border - golden -->
+  <ellipse cx="25" cy="35" rx="21" ry="30" stroke="#C9A87C" stroke-width="1.8" fill="none"/>
+  <!-- Top circle -->
+  <circle cx="25" cy="23" r="12" stroke="#C9A87C" stroke-width="1.8" fill="none"/>
+  <!-- Bottom circle -->
+  <circle cx="25" cy="47" r="12" stroke="#C9A87C" stroke-width="1.8" fill="none"/>
+  <!-- Left circle -->
+  <circle cx="16" cy="35" r="12" stroke="#C9A87C" stroke-width="1.8" fill="none"/>
+  <!-- Right circle -->
+  <circle cx="34" cy="35" r="12" stroke="#C9A87C" stroke-width="1.8" fill="none"/>
+</svg>

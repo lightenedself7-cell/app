@@ -1,34 +1,33 @@
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+html {
+  scroll-behavior: smooth;
 }
 
-.App-header {
-    background-color: #0f0f10;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+body {
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #FDF9F4;
 }
 
-.App-link {
-    color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+:root {
+  --color-bg-primary: #FDF9F4;
+  --color-bg-secondary: #F5E8E2;
+  --color-bg-card: #FFFFFF;
+  --color-text-primary: #9B8376;
+  --color-text-secondary: #B39A8E;
+  --color-text-muted: #D4C4BC;
+  --color-accent-rose: #E8D4CC;
+  --color-accent-peach: #F5E8E2;
+  --color-accent-gold: #D4A894;
+  --color-button-primary: #C79B87;
+  --color-button-hover: #B88A76;
+  --color-nav-bar: #C9A895;
 }
