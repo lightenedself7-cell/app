@@ -68,17 +68,9 @@ const ServicesGrid = () => {
   const handleBookNow = (service) => {
     const zohoUrl = ZOHO_BOOKING_URLS[service.title];
     if (zohoUrl) {
-      // Show modal with service details, then open Zoho in new tab
       setSelectedService({ ...service, zohoUrl });
     } else {
-      window.open("https://lightenedself.zohobookings.ca/#/13534000000039010", '_blank');
-    }
-  };
-
-  const proceedToBooking = () => {
-    if (selectedService?.zohoUrl) {
-      window.open(selectedService.zohoUrl, '_blank');
-      setSelectedService(null);
+      setSelectedService({ ...service, zohoUrl: "https://lightenedself.zohobookings.ca/#/13534000000039010" });
     }
   };
 
@@ -196,60 +188,44 @@ const ServicesGrid = () => {
         </div>
       </section>
 
-      {/* Zoho Booking Modal */}
+      {/* Zoho Booking Modal with Embedded Iframe */}
       {selectedService && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-          <div className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl overflow-hidden">
+          <div className="relative w-full max-w-3xl bg-white rounded-3xl shadow-2xl overflow-hidden" style={{ height: '85vh' }}>
             {/* Modal Header */}
-            <div className="p-8 border-b border-[#E8D4CC]">
+            <div className="flex items-center justify-between px-8 py-4 border-b border-[#E8D4CC]">
+              <div>
+                <h2
+                  className="text-2xl font-light text-[#9B8376]"
+                  style={{ fontFamily: "'Cormorant Garamond', serif" }}
+                >
+                  {selectedService.title}
+                </h2>
+                <p
+                  className="text-xs text-[#B39A8E] mt-1"
+                  style={{ fontFamily: "'Poppins', sans-serif" }}
+                >
+                  {selectedService.duration} &middot; {selectedService.price}
+                </p>
+              </div>
               <button
                 onClick={closeModal}
-                className="absolute top-4 right-4 p-2 hover:bg-[#F5E8E2] rounded-full transition-colors"
+                className="p-2 hover:bg-[#F5E8E2] rounded-full transition-colors"
                 data-testid="close-booking-modal"
               >
                 <X className="w-6 h-6 text-[#9B8376]" />
               </button>
-              
-              <p
-                className="text-xs uppercase tracking-[0.3em] text-[#B39A8E] mb-2"
-                style={{ fontFamily: "'Poppins', sans-serif" }}
-              >
-                Book Your Session
-              </p>
-              <h2
-                className="text-3xl font-light text-[#9B8376] mb-4"
-                style={{ fontFamily: "'Cormorant Garamond', serif" }}
-              >
-                {selectedService.title}
-              </h2>
-              
-              <p 
-                className="text-[#9B8376]/80 mb-6 leading-relaxed"
-                style={{ fontFamily: "'Poppins', sans-serif", fontSize: '14px' }}
-              >
-                {selectedService.description}
-              </p>
-              
-              <div className="flex items-center gap-6 mb-8">
-                <div className="flex items-center gap-2 text-[#B39A8E]" style={{ fontFamily: "'Poppins', sans-serif" }}>
-                  <Clock className="w-5 h-5 text-[#C9A87C]" />
-                  <span>{selectedService.duration}</span>
-                </div>
-                <div className="flex items-center gap-2" style={{ fontFamily: "'Poppins', sans-serif" }}>
-                  <DollarSign className="w-5 h-5 text-[#C9A87C]" />
-                  <span className="font-semibold text-[#9B8376] text-lg">{selectedService.price}</span>
-                </div>
-              </div>
-              
-              <button
-                onClick={proceedToBooking}
-                className="w-full py-4 bg-[#A68B76] text-white rounded-full text-sm font-medium uppercase tracking-wider hover:bg-[#8B7565] transition-all shadow-md hover:shadow-lg"
-                style={{ fontFamily: "'Poppins', sans-serif" }}
-                data-testid="proceed-to-booking"
-              >
-                Proceed to Booking
-              </button>
             </div>
+            
+            {/* Zoho Booking Iframe */}
+            <iframe
+              src={selectedService.zohoUrl}
+              title={`Book ${selectedService.title}`}
+              className="w-full border-0"
+              style={{ height: 'calc(85vh - 80px)' }}
+              allowFullScreen
+              data-testid="zoho-booking-iframe"
+            />
           </div>
         </div>
       )}

@@ -1,8 +1,14 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { X } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Sparkles } from "lucide-react";
+
+const ZOHO_URLS = {
+  virtual: "https://lightenedself.zohobookings.ca/#/13534000000039166",
+  mentorship: "https://lightenedself.zohobookings.ca/#/13534000000039236",
+  couple: "https://lightenedself.zohobookings.ca/#/13534000000039219",
+};
 
 const services = [
   {
@@ -50,7 +56,7 @@ const services = [
 ];
 
 const WorkWithMePage = () => {
-  const navigate = useNavigate();
+  const [bookingService, setBookingService] = useState(null);
 
   return (
     <div className="min-h-screen bg-[#F5F3F0]">
@@ -155,22 +161,51 @@ const WorkWithMePage = () => {
                   </div>
 
                   {/* Book Now Button */}
-                  <a
-                    href="https://zoho.com/bookings"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    onClick={() => setBookingService(service)}
                     className="inline-flex items-center gap-2 px-8 py-4 bg-[#B68D6D] text-white rounded-full text-sm font-medium uppercase tracking-wider hover:bg-[#A67D5D] transition-all"
                     style={{ fontFamily: "'Poppins', sans-serif" }}
                     data-testid={`service-book-${service.id}`}
                   >
-                    Book Now →
-                  </a>
+                    Book Now
+                  </button>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </main>
+
+      {/* Zoho Booking Modal */}
+      {bookingService && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+          <div className="relative w-full max-w-3xl bg-white rounded-3xl shadow-2xl overflow-hidden" style={{ height: '85vh' }}>
+            <div className="flex items-center justify-between px-8 py-4 border-b border-[#E8D4CC]">
+              <h2
+                className="text-2xl font-light text-[#9B8376]"
+                style={{ fontFamily: "'Cormorant Garamond', serif" }}
+              >
+                {bookingService.title}
+              </h2>
+              <button
+                onClick={() => setBookingService(null)}
+                className="p-2 hover:bg-[#F5E8E2] rounded-full transition-colors"
+                data-testid="close-work-booking-modal"
+              >
+                <X className="w-6 h-6 text-[#9B8376]" />
+              </button>
+            </div>
+            <iframe
+              src={ZOHO_URLS[bookingService.id]}
+              title={`Book ${bookingService.title}`}
+              className="w-full border-0"
+              style={{ height: 'calc(85vh - 72px)' }}
+              allowFullScreen
+              data-testid="zoho-work-booking-iframe"
+            />
+          </div>
+        </div>
+      )}
 
       <Footer />
     </div>
