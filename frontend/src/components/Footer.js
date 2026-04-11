@@ -42,6 +42,8 @@ const Footer = () => {
     { name: "Aura Cleansing", path: "/", hash: "services" },
   ];
 
+const footerLinkClass = "text-sm text-[#738062] hover:text-[#546142] transition-colors cursor-pointer relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-[-2px] after:h-[1.5px] after:w-0 after:bg-[#B68D6D] after:transition-all after:duration-300 hover:after:w-full";
+
   return (
     <footer className="bg-white border-t border-[#E6E0D7] py-16 px-6">
       <div className="max-w-6xl mx-auto">
@@ -64,7 +66,7 @@ const Footer = () => {
             </p>
             <a
               href="mailto:connect@lightenedself.com"
-              className="text-sm text-[#B68D6D] hover:text-[#A67D5D] transition-colors"
+              className={footerLinkClass + " text-[#B68D6D] hover:text-[#A67D5D]"}
               style={{ fontFamily: "'Poppins', sans-serif" }}
             >
               connect@lightenedself.com
@@ -87,7 +89,7 @@ const Footer = () => {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-[#738062] hover:text-[#546142] transition-colors cursor-pointer"
+                      className={footerLinkClass}
                       style={{ fontFamily: "'Poppins', sans-serif" }}
                       data-testid={`footer-link-${index}`}
                     >
@@ -96,7 +98,7 @@ const Footer = () => {
                   ) : (
                     <button
                       onClick={() => handleRoute(link.path, link.hash)}
-                      className="text-sm text-[#738062] hover:text-[#546142] transition-colors cursor-pointer"
+                      className={footerLinkClass}
                       style={{ fontFamily: "'Poppins', sans-serif" }}
                       data-testid={`footer-link-${index}`}
                     >
@@ -121,7 +123,7 @@ const Footer = () => {
                 <li key={index}>
                   <button
                     onClick={() => handleRoute(service.path, service.hash)}
-                    className="text-sm text-[#738062] hover:text-[#546142] transition-colors cursor-pointer"
+                    className={footerLinkClass}
                     style={{ fontFamily: "'Poppins', sans-serif" }}
                     data-testid={`footer-service-${index}`}
                   >

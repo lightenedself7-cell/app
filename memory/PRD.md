@@ -9,6 +9,7 @@ User requested multiple UI/UX fixes across sessions:
 5. Add loading shimmer while Zoho widget loads
 6. Fix footer Quick Links and Services to be clickable with correct routing
 7. Make "Lightened Self" and logo link to homepage hero section
+8. Add slide-in underline hover animation to footer links
 
 ## Architecture
 - **Frontend**: React (CRA with Craco) + Tailwind CSS + shadcn/ui
@@ -21,19 +22,10 @@ User requested multiple UI/UX fixes across sessions:
 - [x] Fixed nav scroll-to-section with navbar offset
 - [x] Embedded Zoho Booking widget in modals
 - [x] Added shimmer loading skeleton for Zoho widget
-- [x] Fixed footer Quick Links routing (Work With Me, Tools, Contact, Client Portal)
-- [x] Fixed footer Services routing (1:1 Virtual, Mentorship, Couple Healing, Aura Cleansing)
-- [x] Made footer "Lightened Self" clickable → homepage
-- [x] Made navbar logo scroll to hero on click
-- [x] All tests passed (100% across 4 iterations)
-
-## Zoho Booking URL Map (portal-embed format)
-- Energy Healing: #/13534000000039166
-- Intuitive Reading: #/13534000000039185
-- Guided Meditation: #/13534000000039202
-- Couple Healing: #/13534000000039219
-- 1:1 Mentoring: #/13534000000039236
-- Inner Transformation: #/13534000000039259
+- [x] Fixed footer Quick Links and Services routing
+- [x] Made footer/navbar branding link to homepage hero
+- [x] Added slide-in underline hover animation on all footer links
+- [x] All tests passed (100%)
 
 ## Prioritized Backlog
 - P1: Email confirmation on booking (needs Zoho SMTP credentials)
