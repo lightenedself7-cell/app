@@ -1,64 +1,39 @@
-# Lightened Self - Booking App PRD
+# Lightened Self - Spiritual Healing Website
 
 ## Original Problem Statement
-User reported that the booking time slots were showing old/past times for the current day that had already passed. Requested:
-1. Use Calgary timezone (Mountain Time - America/Edmonton)
-2. Hide past time slots for the current day
+User requested 3 UI fixes:
+1. Remove background watermark logo with opacity (doesn't look nice)
+2. Remove arrow key icons from "Work with Me" and "Tools" dropdown menus (keep hover behavior)
+3. Fix navigation scroll-to-section for all "Work with Me" items (wrong section / no scroll)
 
-## App Overview
-A spiritual healing and wellness booking platform called "Lightened Self" with:
-- Energy Healing Sessions ($120, 60 min)
-- Intuitive Readings ($95, 45 min)
-- Guided Meditations ($55, 30 min)
-- Inner Transformation Workshops ($199, 120 min)
-- 1:1 Spiritual Mentorship ($450, Monthly)
-- Couple Healing Journey ($180, 90 min)
+## Architecture
+- **Frontend**: React (CRA with Craco) + Tailwind CSS + shadcn/ui
+- **Backend**: FastAPI + MongoDB
+- **Payments**: Stripe checkout integration
+- **UI Components**: Radix UI NavigationMenu for dropdowns
 
-## Tech Stack
-- **Frontend**: React 19 with Tailwind CSS, shadcn/ui components
-- **Backend**: FastAPI (Python)
-- **Database**: MongoDB
-- **Payment**: Stripe integration
-- **Email**: Resend integration
+## Core Requirements (Static)
+- Spiritual healing services website for "Lightened Self"
+- Navigation with dropdown menus for "Work with Me" and "Tools"
+- Service pages with booking flow (Stripe checkout)
+- Contact form with MongoDB storage
 
-## What's Been Implemented (April 10, 2026)
+## What's Been Implemented (Jan 2026)
+- [x] Removed background watermark overlay from App.js
+- [x] Removed ChevronDown arrow icons from NavigationMenuTrigger component and Navigation.js
+- [x] Added `id` attributes to WorkWithMePage.js service sections (virtual, mentorship, couple)
+- [x] Updated Navigation.js handleNavClick with scrollToHash function (80px navbar offset)
+- [x] Fixed Contact button scroll behavior for both desktop and mobile
+- [x] All 11 tests passed (100% success)
 
-### Bug Fix: Time Slot Timezone Filtering
-**File Modified**: `/app/frontend/src/components/BookingModal.js`
+## User Personas
+- **Clients**: People seeking energy healing, mentorship, couple healing sessions
+- **Site Owner**: Spiritual healer offering virtual sessions and programs
 
-**Changes Made**:
-1. Added Calgary timezone constant (`America/Edmonton`)
-2. Implemented `getCalgaryDateString()` - returns current date in Calgary timezone
-3. Implemented `getCalgaryTime()` - returns current hours/minutes in Calgary timezone
-4. Implemented `getAvailableTimeSlots(selectedDate)` - filters time slots:
-   - For future dates: shows all slots (9 AM - 7 PM)
-   - For today: hides past time slots based on current Calgary time
-   - For past dates: shows no slots
-5. Added "(Calgary Time)" label to time field
-6. Added message when no time slots available for selected date
-7. Date picker min value now uses Calgary timezone
-
-## Core Requirements
-- [x] Time slots respect Calgary timezone
-- [x] Past time slots hidden for current day
-- [x] Cannot select past dates
-- [x] All time slots available for future dates
-
-## P0/P1/P2 Features Remaining
-
-### P0 (Critical)
-- None - core booking flow works
-
-### P1 (Important)
-- Stripe webhook configuration for production
-- Email delivery setup with verified domain
-
-### P2 (Nice to Have)
-- Add time slot availability checking against existing bookings
-- Admin dashboard for managing bookings
-- Recurring booking option for mentorship
+## Prioritized Backlog
+- P1: Email confirmation on booking (from connect@lightenedself.com) - deferred per user request, needs Zoho SMTP app password
+- P2: Additional service pages and content
+- P3: SEO optimization
 
 ## Next Tasks
-1. Configure Stripe API keys in production environment
-2. Set up Resend email with verified domain
-3. Deploy to production
+- Email confirmation integration when user is ready to provide Zoho SMTP credentials
