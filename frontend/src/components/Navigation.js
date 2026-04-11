@@ -7,24 +7,16 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const Navigation = () => {
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-    setMobileMenuOpen(false);
-  };
-
   const workWithMeServices = [
-    { name: "1:1 Virtual", path: "/work-with-me" },
-    { name: "1:1 Mentorship", path: "/work-with-me" },
-    { name: "Couple Healing", path: "/work-with-me" },
+    { name: "1:1 Virtual", path: "/work-with-me", hash: "virtual" },
+    { name: "1:1 Mentorship", path: "/work-with-me", hash: "mentorship" },
+    { name: "Couple Healing", path: "/work-with-me", hash: "couple" },
     { name: "Meditation", section: "services" },
     { name: "Aura Cleansing", section: "services" },
     { name: "Quick Energy Reset", section: "services" },
@@ -35,12 +27,34 @@ const Navigation = () => {
     { name: "Programs", path: "/programs" }
   ];
 
+  const scrollToHash = (hash) => {
+    const el = document.getElementById(hash);
+    if (el) {
+      const navHeight = 80;
+      const top = el.getBoundingClientRect().top + window.scrollY - navHeight;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  };
+
   const handleNavClick = (item) => {
-    if (item.path) {
+    if (item.path && item.hash) {
+      const currentPath = window.location.pathname;
+      if (currentPath === item.path) {
+        scrollToHash(item.hash);
+      } else {
+        navigate(item.path);
+        setTimeout(() => scrollToHash(item.hash), 300);
+      }
+    } else if (item.path) {
       navigate(item.path);
     } else if (item.section) {
-      navigate('/');
-      setTimeout(() => scrollToSection(item.section), 100);
+      const currentPath = window.location.pathname;
+      if (currentPath === '/') {
+        scrollToHash(item.section);
+      } else {
+        navigate('/');
+        setTimeout(() => scrollToHash(item.section), 300);
+      }
     }
     setMobileMenuOpen(false);
   };
@@ -76,7 +90,6 @@ const Navigation = () => {
                     data-testid="nav-work-with-me"
                   >
                     Work With Me
-                    <ChevronDown className="w-3 h-3" />
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid w-[280px] gap-2 p-4 bg-white/95 backdrop-blur-md shadow-xl rounded-xl border border-[#E8D4CC]/30">
@@ -104,7 +117,6 @@ const Navigation = () => {
                     data-testid="nav-tools"
                   >
                     Tools
-                    <ChevronDown className="w-3 h-3" />
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid w-[220px] gap-2 p-4 bg-white/95 backdrop-blur-md shadow-xl rounded-xl border border-[#E8D4CC]/30">
@@ -128,8 +140,25 @@ const Navigation = () => {
                 <NavigationMenuItem>
                   <button
                     onClick={() => {
-                      navigate('/');
-                      setTimeout(() => scrollToSection('contact'), 100);
+                      const currentPath = window.location.pathname;
+                      if (currentPath === '/') {
+                        const el = document.getElementById('contact');
+                        if (el) {
+                          const navHeight = 80;
+                          const top = el.getBoundingClientRect().top + window.scrollY - navHeight;
+                          window.scrollTo({ top, behavior: "smooth" });
+                        }
+                      } else {
+                        navigate('/');
+                        setTimeout(() => {
+                          const el = document.getElementById('contact');
+                          if (el) {
+                            const navHeight = 80;
+                            const top = el.getBoundingClientRect().top + window.scrollY - navHeight;
+                            window.scrollTo({ top, behavior: "smooth" });
+                          }
+                        }, 300);
+                      }
                     }}
                     className="text-sm uppercase tracking-[0.15em] text-[#F5EDE6]/90 hover:text-[#F5EDE6] transition-colors font-medium"
                     style={{ fontFamily: "'Poppins', sans-serif" }}
@@ -203,8 +232,25 @@ const Navigation = () => {
               {/* Contact */}
               <button
                 onClick={() => {
-                  navigate('/');
-                  setTimeout(() => scrollToSection('contact'), 100);
+                  const currentPath = window.location.pathname;
+                  if (currentPath === '/') {
+                    const el = document.getElementById('contact');
+                    if (el) {
+                      const navHeight = 80;
+                      const top = el.getBoundingClientRect().top + window.scrollY - navHeight;
+                      window.scrollTo({ top, behavior: "smooth" });
+                    }
+                  } else {
+                    navigate('/');
+                    setTimeout(() => {
+                      const el = document.getElementById('contact');
+                      if (el) {
+                        const navHeight = 80;
+                        const top = el.getBoundingClientRect().top + window.scrollY - navHeight;
+                        window.scrollTo({ top, behavior: "smooth" });
+                      }
+                    }, 300);
+                  }
                   setMobileMenuOpen(false);
                 }}
                 className="block w-full text-left px-4 py-2 text-[#F5EDE6] hover:bg-[#8B7565] rounded-lg transition-colors font-medium"

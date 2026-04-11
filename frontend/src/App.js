@@ -10,25 +10,6 @@ import BookingCancelPage from "@/pages/BookingCancelPage";
 function App() {
   return (
     <div className="App">
-      {/* Fixed Golden Watermark - visible while scrolling */}
-      <div 
-        className="fixed inset-0 pointer-events-none z-0 flex items-center justify-center"
-        style={{
-          opacity: 0.12
-        }}
-      >
-        <div
-          className="w-[700px] h-[980px]"
-          style={{
-            backgroundImage: 'url(/watermark.svg)',
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center',
-            filter: 'drop-shadow(0 0 20px rgba(201, 168, 124, 0.2))'
-          }}
-        ></div>
-      </div>
-      
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />

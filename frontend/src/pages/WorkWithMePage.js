@@ -86,6 +86,7 @@ const WorkWithMePage = () => {
             {services.map((service, index) => (
               <div
                 key={service.id}
+                id={service.id}
                 className={`grid md:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}
                 data-testid={`service-detail-${service.id}`}
               >
