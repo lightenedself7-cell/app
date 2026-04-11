@@ -65,7 +65,7 @@ const Navigation = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <button
-            onClick={() => { navigate('/'); setMobileMenuOpen(false); }}
+            onClick={() => { navigate('/'); window.scrollTo({ top: 0, behavior: 'smooth' }); setMobileMenuOpen(false); }}
             className="flex items-center gap-2 md:gap-4 hover:opacity-90 transition-opacity"
             data-testid="logo-button"
           >

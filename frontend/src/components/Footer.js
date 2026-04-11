@@ -4,18 +4,42 @@ import { useNavigate } from "react-router-dom";
 const Footer = () => {
   const navigate = useNavigate();
 
+  const scrollToHash = (hash) => {
+    const el = document.getElementById(hash);
+    if (el) {
+      const navHeight = 80;
+      const top = el.getBoundingClientRect().top + window.scrollY - navHeight;
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+  };
+
+  const handleRoute = (path, hash) => {
+    if (hash) {
+      const currentPath = window.location.pathname;
+      if (currentPath === path) {
+        scrollToHash(hash);
+      } else {
+        navigate(path);
+        setTimeout(() => scrollToHash(hash), 300);
+      }
+    } else {
+      navigate(path);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   const quickLinks = [
     { name: "Work With Me", path: "/work-with-me" },
     { name: "Tools & Resources", path: "/meditations" },
-    { name: "Contact", action: () => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }) },
-    { name: "Client Portal", href: "https://zoho.com/portal", external: true }
+    { name: "Contact", path: "/", hash: "contact" },
+    { name: "Client Portal", href: "https://lightenedself.zohobookings.ca", external: true }
   ];
 
   const services = [
-    "1:1 Virtual Sessions",
-    "1:1 Mentorship",
-    "Couple Healing",
-    "Aura Cleansing"
+    { name: "1:1 Virtual Sessions", path: "/work-with-me", hash: "virtual" },
+    { name: "1:1 Mentorship", path: "/work-with-me", hash: "mentorship" },
+    { name: "Couple Healing", path: "/work-with-me", hash: "couple" },
+    { name: "Aura Cleansing", path: "/", hash: "services" },
   ];
 
   return (
@@ -24,12 +48,14 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
           {/* About */}
           <div>
-            <h3
-              className="text-2xl font-normal text-[#546142] mb-4"
+            <button
+              onClick={() => { navigate('/'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className="text-2xl font-normal text-[#546142] mb-4 cursor-pointer hover:opacity-80 transition-opacity text-left"
               style={{ fontFamily: "'Cormorant Garamond', serif" }}
+              data-testid="footer-logo"
             >
               Lightened Self
-            </h3>
+            </button>
             <p
               className="text-sm text-[#738062] leading-relaxed mb-4"
               style={{ fontFamily: "'Poppins', sans-serif" }}
@@ -61,24 +87,18 @@ const Footer = () => {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-[#738062] hover:text-[#546142] transition-colors"
+                      className="text-sm text-[#738062] hover:text-[#546142] transition-colors cursor-pointer"
                       style={{ fontFamily: "'Poppins', sans-serif" }}
+                      data-testid={`footer-link-${index}`}
                     >
                       {link.name}
                     </a>
-                  ) : link.action ? (
-                    <button
-                      onClick={link.action}
-                      className="text-sm text-[#738062] hover:text-[#546142] transition-colors"
-                      style={{ fontFamily: "'Poppins', sans-serif" }}
-                    >
-                      {link.name}
-                    </button>
                   ) : (
                     <button
-                      onClick={() => navigate(link.path)}
-                      className="text-sm text-[#738062] hover:text-[#546142] transition-colors"
+                      onClick={() => handleRoute(link.path, link.hash)}
+                      className="text-sm text-[#738062] hover:text-[#546142] transition-colors cursor-pointer"
                       style={{ fontFamily: "'Poppins', sans-serif" }}
+                      data-testid={`footer-link-${index}`}
                     >
                       {link.name}
                     </button>
@@ -98,12 +118,15 @@ const Footer = () => {
             </h4>
             <ul className="space-y-3">
               {services.map((service, index) => (
-                <li
-                  key={index}
-                  className="text-sm text-[#738062]"
-                  style={{ fontFamily: "'Poppins', sans-serif" }}
-                >
-                  {service}
+                <li key={index}>
+                  <button
+                    onClick={() => handleRoute(service.path, service.hash)}
+                    className="text-sm text-[#738062] hover:text-[#546142] transition-colors cursor-pointer"
+                    style={{ fontFamily: "'Poppins', sans-serif" }}
+                    data-testid={`footer-service-${index}`}
+                  >
+                    {service.name}
+                  </button>
                 </li>
               ))}
             </ul>
