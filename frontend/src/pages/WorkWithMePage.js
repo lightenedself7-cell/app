@@ -3,11 +3,12 @@ import { X } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Sparkles } from "lucide-react";
+import ZohoBookingEmbed from "@/components/ZohoBookingEmbed";
 
 const ZOHO_URLS = {
-  virtual: "https://lightenedself.zohobookings.ca/#/13534000000039166",
-  mentorship: "https://lightenedself.zohobookings.ca/#/13534000000039236",
-  couple: "https://lightenedself.zohobookings.ca/#/13534000000039219",
+  virtual: "https://lightenedself.zohobookings.ca/portal-embed#/13534000000039166",
+  mentorship: "https://lightenedself.zohobookings.ca/portal-embed#/13534000000039236",
+  couple: "https://lightenedself.zohobookings.ca/portal-embed#/13534000000039219",
 };
 
 const services = [
@@ -195,14 +196,12 @@ const WorkWithMePage = () => {
                 <X className="w-6 h-6 text-[#9B8376]" />
               </button>
             </div>
-            <iframe
-              src={ZOHO_URLS[bookingService.id]}
-              title={`Book ${bookingService.title}`}
-              className="w-full border-0"
-              style={{ height: 'calc(85vh - 72px)' }}
-              allowFullScreen
-              data-testid="zoho-work-booking-iframe"
-            />
+            <div className="overflow-y-auto" style={{ height: 'calc(85vh - 72px)' }}>
+              <ZohoBookingEmbed
+                url={ZOHO_URLS[bookingService.id]}
+                height="600px"
+              />
+            </div>
           </div>
         </div>
       )}

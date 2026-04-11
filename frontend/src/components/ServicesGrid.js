@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { Clock, DollarSign, X } from "lucide-react";
+import ZohoBookingEmbed from "@/components/ZohoBookingEmbed";
 
-// Zoho Booking URLs for each service
+// Zoho Booking embed URLs for each service (portal-embed format)
 const ZOHO_BOOKING_URLS = {
-  "Energy Healing Session": "https://lightenedself.zohobookings.ca/#/13534000000039166",
-  "Intuitive Reading": "https://lightenedself.zohobookings.ca/#/13534000000039185",
-  "Guided Meditation": "https://lightenedself.zohobookings.ca/#/13534000000039202",
-  "Couple Healing Journey": "https://lightenedself.zohobookings.ca/#/13534000000039219",
-  "1:1 Mentoring": "https://lightenedself.zohobookings.ca/#/13534000000039236",
-  "Inner Transformation Workshop": "https://lightenedself.zohobookings.ca/#/13534000000039259",
+  "Energy Healing Session": "https://lightenedself.zohobookings.ca/portal-embed#/13534000000039166",
+  "Intuitive Reading": "https://lightenedself.zohobookings.ca/portal-embed#/13534000000039185",
+  "Guided Meditation": "https://lightenedself.zohobookings.ca/portal-embed#/13534000000039202",
+  "Couple Healing Journey": "https://lightenedself.zohobookings.ca/portal-embed#/13534000000039219",
+  "1:1 Mentoring": "https://lightenedself.zohobookings.ca/portal-embed#/13534000000039236",
+  "Inner Transformation Workshop": "https://lightenedself.zohobookings.ca/portal-embed#/13534000000039259",
 };
 
 const services = [
@@ -188,7 +189,7 @@ const ServicesGrid = () => {
         </div>
       </section>
 
-      {/* Zoho Booking Modal with Embedded Iframe */}
+      {/* Zoho Booking Modal with Embedded Widget */}
       {selectedService && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
           <div className="relative w-full max-w-3xl bg-white rounded-3xl shadow-2xl overflow-hidden" style={{ height: '85vh' }}>
@@ -217,15 +218,13 @@ const ServicesGrid = () => {
               </button>
             </div>
             
-            {/* Zoho Booking Iframe */}
-            <iframe
-              src={selectedService.zohoUrl}
-              title={`Book ${selectedService.title}`}
-              className="w-full border-0"
-              style={{ height: 'calc(85vh - 80px)' }}
-              allowFullScreen
-              data-testid="zoho-booking-iframe"
-            />
+            {/* Zoho Booking Embed */}
+            <div className="overflow-y-auto" style={{ height: 'calc(85vh - 80px)' }}>
+              <ZohoBookingEmbed
+                url={selectedService.zohoUrl}
+                height="600px"
+              />
+            </div>
           </div>
         </div>
       )}
