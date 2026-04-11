@@ -244,7 +244,7 @@ const ContactSection = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full px-6 py-4 bg-[#546142] text-white rounded-full text-sm font-medium hover:bg-[#738062] transition-all hover:shadow-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-wider"
+                  className="w-full px-6 py-4 bg-[#A68B76] text-white rounded-full text-sm font-medium hover:bg-[#8B7565] transition-all hover:shadow-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-wider"
                   style={{ fontFamily: "'Poppins', sans-serif" }}
                   data-testid="contact-form-submit"
                 >
